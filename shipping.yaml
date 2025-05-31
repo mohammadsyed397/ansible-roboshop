@@ -57,7 +57,7 @@
       msg: "schema output: {{schema}}"
 
   - name: load cities data
-    ansible.builtin.shell: "mysql -h database.robosyed.space -uroot -pRoboShop@1  < /app/schema/shipping.sql"
+    ansible.builtin.shell: "mysql -h database.robosyed.space -uroot -pRoboShop@1  < /app/db/shipping.sql"
     when: schema.stdout != "1"
 
   - name: start and enable shipping
