@@ -19,13 +19,13 @@
       state: directory
   - name: Download the code 
     ansible.builtin.get_url:
-    url: https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip 
-    dest: /tmp/shipping.zip
+      url: https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip 
+      dest: /tmp/shipping.zip
   - name: unzip the code
     ansible.builtin.unarchive:
-    src: /tmp/shipping.zip
-    dest: /app
-  - name: install the dependencies and create a ansible.builtin.package
+      src: /tmp/shipping.zip
+      dest: /app
+  - name: install the dependencies 
     ansible.builtin.shell: mvn clean package 
   - name: move the jar file 
     ansible.builtin.copy:
