@@ -37,7 +37,7 @@
       src: services/shipping.service
       dest: /etc/systemd/system/shipping.service
   - name: daemon-reload
-    ansible.builtin.system.service:
+    ansible.builtin.systemd_service:
       daemon_reload: true
   - name: install dependencies
     ansible.builtin.command: mvn clean package
