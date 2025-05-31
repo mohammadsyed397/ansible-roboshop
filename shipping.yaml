@@ -8,11 +8,11 @@
       state: present 
   - name: create a roboshop user. 
     ansible.builtin.user:
-        name: roboshop
-        shell: /sbin/nologin
-        home: /app
-        system: true
-        comment: "roboshop system user"
+      name: roboshop
+      shell: /sbin/nologin
+      home: /app
+      system: true
+      comment: "roboshop system user"
   - name: create a directory
     ansbile.builtin.file:
     path: /app
@@ -59,7 +59,7 @@
       daemon_reload: true
 
   - name: install mysql client
-    ansible.builtin.dnf:
+    ansible.builtin.package:
       name: mysql
       state: present
 
