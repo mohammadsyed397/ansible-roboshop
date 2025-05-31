@@ -27,7 +27,9 @@
       dest: /app
       remote_src: yes
   - name: install the dependencies 
-    ansible.builtin.shell: mvn clean package 
+    ansible.builtin.shell: mvn clean package
+    args:
+      chdir: /app 
   - name: move the jar file 
     ansible.builtin.copy:
       src: /app/target/shipping-1.0.jar
