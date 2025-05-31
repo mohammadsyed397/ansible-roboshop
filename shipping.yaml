@@ -58,6 +58,8 @@
 
   - name: load cities data
     ansible.builtin.shell: "mysql -h database.robosyed.space -uroot -pRoboShop@1  < /app/db/shipping.sql"
+    args:
+      executable: /bin/bash
     when: schema.stdout != "1"
 
   - name: start and enable shipping
