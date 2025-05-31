@@ -21,7 +21,7 @@
         url: https://roboshop-artifacts.s3.amazonaws.com/cart-v3.zip
         dest: /tmp/cart.zip
     - name: unzip the code
-      ansible.builtin.unarcheive:
+      ansible.builtin.unarchive:
         src: /tmp/cart.zip
         dest: /app
         remote_src: yes
@@ -33,10 +33,10 @@
         src: services/cart.service
         dest: /etc/systemd/system/cart.service
     - name: reload the  daemon
-      anisble.builtin.systemd_service.module:
+      anisble.builtin.systemd_service:
         daemon_reload: true
     - name: enable and start the cart service
-      anisble.builtin.service:  
+      ansible.builtin.service:  
         name: cart 
         enabled: yes
         state: started
