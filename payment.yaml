@@ -4,7 +4,7 @@
   tasks:
     - name: install python
       ansible.builtin.package:
-        name: python3 gcc python3-devel
+        name: python3gccpython3-devel
         state: present
     - name: create a user
       ansible.builtin.user:
