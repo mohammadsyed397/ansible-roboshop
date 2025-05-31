@@ -29,6 +29,7 @@
       ansible.builtin.unarchive:
         src: /tmp/payment.zip
         dest: /app
+        remote_src: yes
     - name: install the dependencies
       ansible.builtin.shell: pip3 install -r requirements.txt
       args:
