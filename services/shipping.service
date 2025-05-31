@@ -5,7 +5,7 @@ Description=Shipping Service
 User=roboshop
 // highlight-start
 Environment=CART_ENDPOINT=cart:robosyed.space:8080
-Environment=DB_HOST=database.robosyed.space
+Environment=DB_HOST=database.robosyed.space:3306/shipping
 // highlight-end
 ExecStart=/bin/java -jar /app/shipping.jar
 SyslogIdentifier=shipping
