@@ -33,7 +33,7 @@
   - name: move the jar file 
     ansible.builtin.copy:
       src: /app/target/shipping-1.0.jar
-      dest: shipping.jar
+      dest: /app/shipping.jar
       remote_src: yes
   - name: create the custom service 
     ansible.builtin.copy:
