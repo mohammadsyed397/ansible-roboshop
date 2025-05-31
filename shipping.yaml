@@ -25,6 +25,7 @@
     ansible.builtin.unarchive:
       src: /tmp/shipping.zip
       dest: /app
+      remote_src: yes
   - name: install the dependencies 
     ansible.builtin.shell: mvn clean package 
   - name: move the jar file 
