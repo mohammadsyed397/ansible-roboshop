@@ -1,0 +1,52 @@
+- name: setup catalogue
+  hosts: catalogue
+  become: yes
+  tasks:
+    - name: disable node.js module
+      ansible.builtin.command: dnf module disable nodejs -y
+    - name: enable node.js:20 
+      ansible.builtin.command: dnf module enable nodejs:20 -y
+    - name: install nodejs
+      ansible.builtin.package:
+        name: nodejs
+        state: present
+    - name: create a user for service
+      ansible.builtin.shell: useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop
+    - name: create a directory
+      ansible.builtin.file:
+        path: /app
+        state: directory
+    - name: download the code
+      ansible.builtin.get_url:
+        url: https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip
+        dest: /tmp/catalogue.zip
+    - name: unzip the code
+      ansible.builtin.unarcheive:
+        src: /tmp/catalogue.zip
+        dest: /app
+        remote_src: yes
+    - name: install nodejs package 
+      community.general.npm:
+        path: /app
+    - name: copy catalogue service module
+      ansible.builtin.copy:
+        src: services/catalogue.service
+        dest: /etc/systemd/system/catalogue.service
+    - name: reload the  daemon
+      anisble.builtin.systemd_service.module:
+        daemon_reload: true
+    - name: enable and start the catalogue service
+      anisble.builtin.service:  
+        name: catalogue 
+        enabled: yes
+        state: started
+    - name: copy mongo.repo
+      ansible.builtin.copy:
+        src: mongo.repo
+        dest: /etc/yum.repos.d/mongo.repo
+    - name: install mongosh
+      ansible.builtin.package:  
+        name: mongodb-mongosh
+        state: present
+    - name: load master data
+      ansible.builtin.shell: mongosh --host database.robosyed.space </app/db/master-data.js
