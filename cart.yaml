@@ -43,7 +43,7 @@
   
   - name: Copy cart service to systemd
     ansible.builtin.copy:
-      src: service/cart.service
+      src: services/cart.service
       dest: /etc/systemd/system/cart.service
   
   - name: Reload systemd daemon
