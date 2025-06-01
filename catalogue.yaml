@@ -1,5 +1,5 @@
 - name: Configuring cart server
-  hosts: cart
+  hosts: catalogue
   become: yes
   tasks:
   - name: Disable default nodejs module
