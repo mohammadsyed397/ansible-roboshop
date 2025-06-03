@@ -4,11 +4,12 @@
   tasks:
     - name: install python
       ansible.builtin.package:
-        loop:
-         - python3
-         - gcc
-         - python3-devel
-        state: present
+        name: "{{ item }}"
+        state: installed
+    loop:
+    - python3 
+    - gcc 
+    - python3-devel
 
     - name: create a user
       ansible.builtin.user:
